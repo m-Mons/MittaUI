@@ -107,6 +107,8 @@ namespace MittaUI.Runtime
                 Observable.EveryValueChanged(value, x => x.Value)
                     .Subscribe(color => _image.color = color).AddTo(this);
 #else
+                SetColorLoopAsync().Forget();
+                
                 // 自前で IObserver を実装してもよかった
                 async UniTaskVoid SetColorLoopAsync()
                 {
@@ -121,8 +123,6 @@ namespace MittaUI.Runtime
                         }
                     }
                 }
-                
-                SetColorLoopAsync().Forget();
 #endif
             }
         }
