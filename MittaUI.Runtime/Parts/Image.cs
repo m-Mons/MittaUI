@@ -113,7 +113,7 @@ namespace MittaUI.Runtime
                     Color c = value.Value;
                     while (!destroyCancellationToken.IsCancellationRequested)
                     {
-                        await UniTask.Yield();
+                        await UniTask.Yield(cancellationToken: destroyCancellationToken);
                         if (c != value.Value)
                         {
                             c = value.Value;
