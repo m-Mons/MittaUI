@@ -5,12 +5,11 @@
   "unity": "2022.3",
   "license": "MIT",
   "dependencies": {
-    "com.cysharp.unitask": "2.0.0"
+    "com.cysharp.unitask": "2.5.4"
   },
   "author": {
     "name": "hoge",
     "url": ""
   },
-  "type": "tool",
-  "description": ""
+  "type": "tool"
 }
