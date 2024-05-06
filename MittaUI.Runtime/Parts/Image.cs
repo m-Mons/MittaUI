@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using MittaUI.Runtime.Constant;
 using MittaUI.Runtime.Extension;
 using MittaUI.Runtime.Parts;
@@ -56,7 +57,7 @@ namespace MittaUI.Runtime
 #if MITTAUI_USE_UPALETTE
             _image.SetColorFromEntryId(_entryId);
 #endif
-#if MITTAUI_USE_R3 && MITTAUI_USE_UPALETTE
+#if MITTAUI_USE_UPALETTE
             SubscribePaletteStore();
 #endif
         }
@@ -95,15 +96,36 @@ namespace MittaUI.Runtime
         }
 #endif
 
-#if MITTAUI_USE_UPALETTE && MITTAUI_USE_R3
+#if MITTAUI_USE_UPALETTE
         private void SubscribePaletteStore()
         {
             PaletteStore.Instance.ColorPalette.TryGetActiveValue(_entryId.Value, out var value);
 
             if (value != null)
+            {
+#if MITTAUI_USE_R3
                 Observable.EveryValueChanged(value, x => x.Value)
                     .Subscribe(color => _image.color = color).AddTo(this);
+#else
+                SetColorLoopAsync().Forget();
+
+                async UniTaskVoid SetColorLoopAsync()
+                {
+                    Color c = value.Value;
+                    while (!destroyCancellationToken.IsCancellationRequested)
+                    {
+                        await UniTask.Yield(cancellationToken: destroyCancellationToken);
+                        if (c != value.Value)
+                        {
+                            c = value.Value;
+                            _image.color = c;
+                        }
+                    }
+                }
+#endif
+            }
         }
+
 #endif
 #if UNITY_EDITOR
         protected override void Reset()
