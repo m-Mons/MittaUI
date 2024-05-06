@@ -11,6 +11,5 @@
     "name": "hoge",
     "url": ""
   },
-  "type": "tool",
-  "description": ""
+  "type": "tool"
 }
