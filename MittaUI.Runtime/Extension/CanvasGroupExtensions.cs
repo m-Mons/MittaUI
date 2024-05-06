@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using MittaUI.Runtime.TweenProvider;
+using MittaUI.Runtime.TinyTween;
 using UnityEngine;
 
 namespace MittaUI.Runtime.Extension
