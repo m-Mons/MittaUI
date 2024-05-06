@@ -12,27 +12,70 @@ using DG.Tweening;
 using LitMotion;
 #endif
 
-namespace MittaUI.Runtime.TweenProvider
+namespace MittaUI.Runtime.TinyTween
 {
     public static class TweenProvider
     {
+        // MEMO : LitMotionはよしなにCastできるはず
+        // TODO : DOTweenのEaseタイプの確認
+        public enum EaseType
+        {
+            Linear = 0,
+            InSine,
+            OutSine,
+            InOutSine,
+            InQuad,
+            OutQuad,
+            InOutQuad,
+            InCubic,
+            OutCubic,
+            InOutCubic,
+            InQuart,
+            OutQuart,
+            InOutQuart,
+            InQuint,
+            OutQuint,
+            InOutQuint,
+            InExpo,
+            OutExpo,
+            InOutExpo,
+            InCirc,
+            OutCirc,
+            InOutCirc,
+            InElastic,
+            OutElastic,
+            InOutElastic,
+            InBack,
+            OutBack,
+            InOutBack,
+            InBounce,
+            OutBounce,
+            InOutBounce,
+            CustomAnimationCurve
+        }
+
         public static async UniTask Tween(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
         {
 #if MITTAUI_USE_LITMOTION
-            await TweenLitMotion(from, to, duration, onUpdate, onComplete, ct);
+            await TweenLitMotion(from, to, duration, onUpdate, onComplete, ease, ct);
 #elif MITTAUI_USE_DOTWEEN && UNITASK_DOTWEEN_SUPPORT
-            await TweenDoTween(from, to, duration, onUpdate, onComplete, ct);
+            await TweenDoTween(from, to, duration, onUpdate, onComplete,ease, ct);
 #else
             await TweenPureUpdate(from, to, duration, onUpdate, onComplete, ct);
 #endif
         }
 
         public static async UniTask Move(Vector3 from, Vector3 to, float duration, Transform target,
-            Action onComplete = null,
-            CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
         {
-            await Tween(0, 1, duration, t => { target.position = Vector3.Lerp(from, to, t); }, onComplete, ct);
+            await Tween(0, 1, duration, t => { target.position = Vector3.Lerp(from, to, t); }, onComplete, ease, ct);
+        }
+        
+        public static async UniTask Scale(Vector3 from, Vector3 to, float duration, Transform target,
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
+        {
+            await Tween(0, 1, duration, t => { target.localScale = Vector3.Lerp(from, to, t); }, onComplete, ease, ct);
         }
 
         private static async UniTask TweenPureUpdate(float from, float to, float duration, Action<float> onUpdate,
@@ -55,9 +98,10 @@ namespace MittaUI.Runtime.TweenProvider
 
 # if MITTAUI_USE_LITMOTION
         private static async UniTask TweenLitMotion(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
         {
             var tween = LMotion.Create(from, to, duration)
+                .WithEase((Ease)ease)
                 .Bind(onUpdate);
 
             await tween.ToUniTask(ct);
@@ -71,7 +115,7 @@ namespace MittaUI.Runtime.TweenProvider
 
 #if MITTAUI_USE_DOTWEEN && UNITASK_DOTWEEN_SUPPORT
         private static async UniTask TweenDoTween(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, CancellationToken ct = default)
+            Action onComplete = null,EaseType ease = default, CancellationToken ct = default)
         {
             var tween = DOTween.To(() => from, x => onUpdate(x), to, duration);
             await tween.ToUniTask(cancellationToken: ct);
