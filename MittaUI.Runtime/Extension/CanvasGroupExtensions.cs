@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using MittaUI.Runtime.TweenProvider;
 using UnityEngine;
 
 namespace MittaUI.Runtime.Extension
@@ -17,7 +18,7 @@ namespace MittaUI.Runtime.Extension
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             // TODO : アニメーション実装
-            //await canvasGroup.DOFade(1f, fadeDuration);
+            await canvasGroup.FadeAsync(1f, fadeDuration);
         }
 
         public static void Disable(this CanvasGroup canvasGroup)
@@ -32,7 +33,7 @@ namespace MittaUI.Runtime.Extension
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             // TODO : アニメーション実装
-            //await canvasGroup.DOFade(0f, fadeDuration);
+            await canvasGroup.FadeAsync(0f, fadeDuration);
         }
     }
 }
