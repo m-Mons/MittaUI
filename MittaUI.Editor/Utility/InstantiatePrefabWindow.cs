@@ -1,5 +1,3 @@
-﻿// https://qiita.com/v9129/items/ef12b7f140c81cb3d876
-
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
