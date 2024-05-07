@@ -12,7 +12,7 @@ namespace MittaUI.Runtime.Parts
     {
         [SerializeField] private bool _toggleState;
         
-        [SerializeField] private BaseButton _button;
+        [SerializeField] private SimpleButton _button;
 
         [Header("チェックボックス反映先のCanvasGroup")] [SerializeField]
         private CanvasGroup _targetGroup;
