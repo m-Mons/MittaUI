@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3662015476594121479}
-  - component: {fileID: 7542361694086299084}
   - component: {fileID: 4622524140608836149}
+  - component: {fileID: 8350592499238485390}
   m_Layer: 5
   m_Name: MittaButton
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7542361694086299084
+--- !u!114 &4622524140608836149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7413456820608376366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e6e9d9569d4a6982cef0242110fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: dc321f6378aab1544b8e0d3caf9d3b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8350592499238485390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413456820608376366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83af3f88e02da4fb6aff3c3ce6586945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isDisabled: 0
@@ -62,18 +74,6 @@ MonoBehaviour:
   _buttonAnimationPullDuration: 0.25
   _buttonAnimationDefaultScale: 1
   _buttonAnimationPullEase: 29
---- !u!114 &4622524140608836149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7413456820608376366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc321f6378aab1544b8e0d3caf9d3b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7575923663272741770
 PrefabInstance:
   m_ObjectHideFlags: 0
