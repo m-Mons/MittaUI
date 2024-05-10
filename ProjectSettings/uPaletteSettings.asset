@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 53
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8021117cf83bf46afa14e77d2593b0d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameEnumsFileGenerateMode: 0
+  _containsFolderNameToNameEnums: 0
+  useFolderViewInPaletteEditor: 1
+  _nameEnumsFolder: {fileID: 102900000, guid: e6f6e1186c44a411092b6b540c98a873, type: 3}
+  _nameEnumsFile: {fileID: 0}
+  _automaticRuntimeDataLoading: 1
