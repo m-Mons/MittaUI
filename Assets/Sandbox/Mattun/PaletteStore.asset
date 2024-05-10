@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edd4d6dec9974f11ba4b078ca3a0e1e, type: 3}
+  m_Name: PaletteStore
+  m_EditorClassIdentifier: 
+  _colorPalette:
+    _entries:
+      _keys:
+      - 62a5feb7-8d4d-43ca-909e-58845b8e7314
+      - 46c79f00-b44b-49e3-ab88-355b521bdc4c
+      - f942f065-0b41-4298-b22e-da55d5fd108b
+      _values:
+      - _id: 62a5feb7-8d4d-43ca-909e-58845b8e7314
+        _name:
+          _value: CommonText
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 0, g: 0, b: 0, a: 1}
+      - _id: 46c79f00-b44b-49e3-ab88-355b521bdc4c
+        _name:
+          _value: Active
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
+      - _id: f942f065-0b41-4298-b22e-da55d5fd108b
+        _name:
+          _value: ToggleActive
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 1, g: 0, b: 0, a: 1}
+    _themes:
+      _keys:
+      - 643519c8-43bd-43b3-874d-c2a52b346147
+      _values:
+      - _id: 643519c8-43bd-43b3-874d-c2a52b346147
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids:
+      - 46c79f00-b44b-49e3-ab88-355b521bdc4c
+      - 62a5feb7-8d4d-43ca-909e-58845b8e7314
+      - f942f065-0b41-4298-b22e-da55d5fd108b
+    _themeOrders:
+      _ids:
+      - 643519c8-43bd-43b3-874d-c2a52b346147
+    _activeThemeId: 643519c8-43bd-43b3-874d-c2a52b346147
+  _gradientPalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - f816a914-1937-4c49-a715-00b53cbc90d9
+      _values:
+      - _id: f816a914-1937-4c49-a715-00b53cbc90d9
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - f816a914-1937-4c49-a715-00b53cbc90d9
+    _activeThemeId: f816a914-1937-4c49-a715-00b53cbc90d9
+  _characterStylePalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - 962c805b-71db-4ecb-a993-e97e74ccde99
+      _values:
+      - _id: 962c805b-71db-4ecb-a993-e97e74ccde99
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - 962c805b-71db-4ecb-a993-e97e74ccde99
+    _activeThemeId: 962c805b-71db-4ecb-a993-e97e74ccde99
+  _characterStyleTMPPalette:
+    _entries:
+      _keys: []
+      _values: []
+    _themes:
+      _keys:
+      - d1aca8ac-fbdb-4471-8403-7dc374fa0cd0
+      _values:
+      - _id: d1aca8ac-fbdb-4471-8403-7dc374fa0cd0
+        _name:
+          _value: Default
+    _entryOrders:
+      _ids: []
+    _themeOrders:
+      _ids:
+      - d1aca8ac-fbdb-4471-8403-7dc374fa0cd0
+    _activeThemeId: d1aca8ac-fbdb-4471-8403-7dc374fa0cd0
+  _missingEntryErrorLevel: 1
