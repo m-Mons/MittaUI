@@ -1,45 +1,56 @@
 ﻿using System;
 using MittaUI.Runtime.Extension;
-#if MITTAUI_USE_R3
 using R3;
-#endif
 using UnityEngine;
 
 namespace MittaUI.Runtime.Parts
 {
+    [DefaultExecutionOrder(-5)]
     [RequireComponent(typeof(SimpleButton))]
     public class BaseToggleButton : UIBehaviour
     {
-        [SerializeField] private bool _toggleState;
-        
+        [Header("トグルボタンの初期状態")] [SerializeField]
+        private bool _toggleState;
+
         [SerializeField] private SimpleButton _button;
 
         [Header("チェックボックス反映先のCanvasGroup")] [SerializeField]
         private CanvasGroup _targetGroup;
 
-        public bool ToggleState
-        {
-            get => _toggleState;
-            set
-            {
-                _toggleState = value;
-                OnToggleChangedCallback?.Invoke(_toggleState);
-            }
-        }
-
+        private ReactiveProperty<bool> _toggleStateProperty = new();
+        public Observable<bool> ToggleStateProperty => _toggleStateProperty;
         public Action<bool> OnToggleChangedCallback { get; set; }
 
-#if MITTAUI_USE_R3
-        public Observable<bool> OnToggleChanged => Observable.FromEvent<bool>(
-            handler => OnToggleChangedCallback += handler,
-            handler => OnToggleChangedCallback -= handler
-        );
-#endif
-        
-        protected override void OnValidate()
+
+        protected override void Awake()
         {
-            base.OnValidate();
-            if (_toggleState)
+            base.Awake();
+
+            _toggleStateProperty = new ReactiveProperty<bool>(_toggleState);
+
+            _button
+                .ClickedObservable
+                .Where(_ => _button.IsDisabled == false)
+                .Subscribe(_ => _toggleStateProperty.Value = !_toggleStateProperty.Value)
+                .AddTo(this);
+
+            ToggleStateProperty
+                .Subscribe(state =>
+                {
+                    _toggleState = state;
+                    SetVisualState();
+                    OnToggleChangedCallback?.Invoke(_toggleState);
+                }).AddTo(this);
+        }
+
+        public void SetToggleState(bool state)
+        {
+            _toggleStateProperty.Value = state;
+        }
+
+        private void SetVisualState()
+        {
+            if (_toggleStateProperty.Value)
             {
                 _targetGroup.Enable();
             }
@@ -47,6 +58,18 @@ namespace MittaUI.Runtime.Parts
             {
                 _targetGroup.Disable();
             }
+        }
+
+        public void SetDisable(bool disable)
+        {
+            _button.SetDisabled(disable);
+        }
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            _toggleStateProperty.Value = _toggleState;
+            SetVisualState();
         }
     }
 }

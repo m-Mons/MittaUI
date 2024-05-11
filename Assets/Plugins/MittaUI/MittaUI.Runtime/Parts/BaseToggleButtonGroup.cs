@@ -13,46 +13,40 @@ namespace MittaUI.Runtime.Parts
     {
         [SerializeField] private List<BaseToggleButton> _toggleButtons;
 
-        private int _selectedButtonIndex;
+        private ReactiveProperty<int> _selectedButtonIndexProperty;
 
-        public int SelectedButtonIndex
-        {
-            get => _selectedButtonIndex;
-            set
-            {
-                _selectedButtonIndex = value;
-                OnSelectedButtonIndexChanged?.Invoke(_selectedButtonIndex);
-            }
-        }
-
-        public Action<int> OnSelectedButtonIndexChanged { get; set; }
-
-#if MITTAUI_USE_R3
-        public Observable<int> OnSelectedButtonIndexChangedObservable => Observable.FromEvent<int>(
-            handler => OnSelectedButtonIndexChanged += handler,
-            handler => OnSelectedButtonIndexChanged -= handler
-        );
-#endif
+        public Observable<int> OnSelectedButtonIndexChangedObservable => _selectedButtonIndexProperty;
 
         protected override void Awake()
         {
             base.Awake();
-            foreach (var (btn, i) in _toggleButtons.Select((btn, i) => (btn, i)))
-            {
-                btn.OnToggleChangedCallback = isOn =>
-                {
-                    foreach (var b in _toggleButtons.Where(b => b != btn))
-                    {
-                        b.ToggleState = false;
-                    }
 
-                    if (isOn)
+            _selectedButtonIndexProperty = new ReactiveProperty<int>(0);
+            _selectedButtonIndexProperty.Subscribe(index =>
+            {
+                Debug.Log(index);
+            }).AddTo(this);
+
+            foreach (var (btn, i) in _toggleButtons.Select(static (btn, i) => (btn, i)))
+            {
+                btn
+                    .ToggleStateProperty
+                    .Where(v => v)
+                    .Subscribe(_ =>
                     {
-                        SelectedButtonIndex = i;
-                    }
-                };
+                        _selectedButtonIndexProperty.Value = i;
+                        foreach (var b in _toggleButtons.Where(b => b != btn))
+                        {
+                            b.SetToggleState(false);
+                            b.SetDisable(false);
+                        }
+
+                        btn.SetToggleState(true);
+                        
+                        // onの時の再度タイプ阻止
+                        btn.SetDisable(true);
+                    }).AddTo(this);
             }
         }
-
     }
 }
