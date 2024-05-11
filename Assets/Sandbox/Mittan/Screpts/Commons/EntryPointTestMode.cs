@@ -5,49 +5,51 @@ using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Modal;
 using UnityScreenNavigator.Runtime.Core.Page;
 using Debug = UnityEngine.Debug;
-using Samples.Mittan.Commons;
 
-enum TestShowViewType
+namespace Samples.Mittan.Commons
 {
-    sheet,
-    page,
-    modal,
-}
-
-public class EntryPointTestMode : MonoBehaviour
-{
-    [SerializeField] private PageContainer pageContainer;
-    [SerializeField] private ModalContainer defaultModalContainer;
-    [SerializeField] private ModalContainer notificationModalContainer;
-
-    
-    [SerializeField] private ScreenUtility.Pages.Names pageName;
-    [SerializeField] private ScreenUtility.Sheets.Names sheetName;
-    [SerializeField] private ScreenUtility.Modals.Names modalName;
-    [SerializeField] private TestShowViewType type;
-    
-    private static bool Initialized { get; set; }
-    
-    private async UniTaskVoid Awake()
+    enum TestShowViewType
     {
-        ScreenUtility.DefaultModal = defaultModalContainer;
-        ScreenUtility.NotificationModal = notificationModalContainer;
-        ScreenUtility.Page = pageContainer;
+        sheet,
+        page,
+        modal,
+    }
 
-        switch (type)
+    public class EntryPointTestMode : MonoBehaviour
+    {
+        [SerializeField] private PageContainer pageContainer;
+        [SerializeField] private ModalContainer defaultModalContainer;
+        [SerializeField] private ModalContainer notificationModalContainer;
+
+    
+        [SerializeField] private ScreenUtility.Pages.Names pageName;
+        [SerializeField] private ScreenUtility.Sheets.Names sheetName;
+        [SerializeField] private ScreenUtility.Modals.Names modalName;
+        [SerializeField] private TestShowViewType type;
+    
+        private static bool Initialized { get; set; }
+    
+        private async UniTaskVoid Awake()
         {
-            case TestShowViewType.sheet:
-                //await ScreenUtility.PushPage(ScreenUtility.Pages.Label[ScreenUtility.Pages.Names.Title]);
-                break;
-            case TestShowViewType.page:
-                await ScreenUtility.PushPage(ScreenUtility.Pages.Label[pageName]);
-                break;
-            case TestShowViewType.modal:
-                await ScreenUtility.PushModal(ScreenUtility.Modals.Label[modalName]);
-                break;
-        }
+            ScreenUtility.DefaultModal = defaultModalContainer;
+            ScreenUtility.NotificationModal = notificationModalContainer;
+            ScreenUtility.Page = pageContainer;
 
-        Initialized = true;
-        Debug.Log("Game Start by awake");
+            switch (type)
+            {
+                case TestShowViewType.sheet:
+                    //await ScreenUtility.PushPage(ScreenUtility.Pages.Label[ScreenUtility.Pages.Names.Title]);
+                    break;
+                case TestShowViewType.page:
+                    await ScreenUtility.PushPage(ScreenUtility.Pages.Label[pageName]);
+                    break;
+                case TestShowViewType.modal:
+                    await ScreenUtility.PushModal(ScreenUtility.Modals.Label[modalName]);
+                    break;
+            }
+
+            Initialized = true;
+            Debug.Log("Game Start by awake");
+        }
     }
 }
