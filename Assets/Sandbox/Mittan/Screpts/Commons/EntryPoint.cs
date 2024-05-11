@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityScreenNavigator.Runtime.Core.Modal;
@@ -20,8 +19,8 @@ namespace Samples.Mittan.Commons
             ScreenUtility.NotificationModal = notificationModalContainer;
             ScreenUtility.Page = pageContainer;
 
-            await ScreenUtility.PushModal(ScreenUtility.Modals.Label[ScreenUtility.Modals.Names.Loading]);
-            await ScreenUtility.PushPage(ScreenUtility.Pages.Label[ScreenUtility.Pages.Names.Title]);
+            //await ScreenUtility.PushModal(ScreenUtility.Modals.Label[ScreenUtility.Modals.Names.Loading]);
+            //await ScreenUtility.PushPage(ScreenUtility.Pages.Label[ScreenUtility.Pages.Names.Title]);
             await ScreenUtility.PopModal();
             Initialized = true;
             Debug.Log("Game Start by awake");
