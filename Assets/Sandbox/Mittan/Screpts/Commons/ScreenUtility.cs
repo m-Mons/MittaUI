@@ -40,13 +40,13 @@ namespace Samples.Mittan.Commons
             public enum Names
             {
                 Default,
-                Menu,
-                InGameStage,
+                Title,
             }
         
             public static Dictionary <Names, string> Label = new Dictionary<Names, string>
             {
                 {Names.Default, "UiPanels/Pages/Default"},
+                {Names.Title, "UiPanels/Pages/Title"},
             }; 
         }
         #endregion
@@ -77,8 +77,8 @@ namespace Samples.Mittan.Commons
         
             public static Dictionary <Names, string> Label = new Dictionary<Names, string>
             {
-                {Names.Default, "UiPanels/Sheets/Default"},
-                {Names.Loading, "UiPanels/Commons/LoadingModal"},
+                {Names.Default, "UiPanels/Modals/Default"},
+                {Names.Loading, "UiPanels/Modals/LoadingModal"},
             }; 
         }
         #endregion
