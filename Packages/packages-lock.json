@@ -41,6 +41,13 @@
       "dependencies": {},
       "hash": "12574c32f658fa23c194357141abc3fc157ea362"
     },
+    "com.harumak.unityscreennavigator": {
+      "version": "https://github.com/Haruma-K/UnityScreenNavigator.git?path=/Assets/UnityScreenNavigator",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "31b372b391d8f10e25ebb99115e584de4545d117"
+    },
     "com.harumak.upalette": {
       "version": "https://github.com/Haruma-K/uPalette.git?path=/Assets/uPalette",
       "depth": 0,
