@@ -18,6 +18,9 @@ MonoBehaviour:
       - 62a5feb7-8d4d-43ca-909e-58845b8e7314
       - 46c79f00-b44b-49e3-ab88-355b521bdc4c
       - f942f065-0b41-4298-b22e-da55d5fd108b
+      - 25dcea59-a4e8-45e9-9d66-924601b80235
+      - 54b36256-c4f8-40b9-b9a3-02271e194a48
+      - f9f880c9-a277-44f1-8fad-52fbc7443381
       _values:
       - _id: 62a5feb7-8d4d-43ca-909e-58845b8e7314
         _name:
@@ -43,6 +46,30 @@ MonoBehaviour:
           - 643519c8-43bd-43b3-874d-c2a52b346147
           _values:
           - _value: {r: 1, g: 0, b: 0, a: 1}
+      - _id: 25dcea59-a4e8-45e9-9d66-924601b80235
+        _name:
+          _value: TranslucentBackground
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.6117647}
+      - _id: 54b36256-c4f8-40b9-b9a3-02271e194a48
+        _name:
+          _value: Header
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 0.3960484, g: 0.6948356, b: 0.9433962, a: 1}
+      - _id: f9f880c9-a277-44f1-8fad-52fbc7443381
+        _name:
+          _value: DefaultBackground
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 0.9982247, g: 1, b: 0.8160377, a: 1}
     _themes:
       _keys:
       - 643519c8-43bd-43b3-874d-c2a52b346147
@@ -55,6 +82,9 @@ MonoBehaviour:
       - 46c79f00-b44b-49e3-ab88-355b521bdc4c
       - 62a5feb7-8d4d-43ca-909e-58845b8e7314
       - f942f065-0b41-4298-b22e-da55d5fd108b
+      - 25dcea59-a4e8-45e9-9d66-924601b80235
+      - 54b36256-c4f8-40b9-b9a3-02271e194a48
+      - f9f880c9-a277-44f1-8fad-52fbc7443381
     _themeOrders:
       _ids:
       - 643519c8-43bd-43b3-874d-c2a52b346147
