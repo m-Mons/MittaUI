@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9021794698715227954}
   - component: {fileID: 4942532279786089962}
-  - component: {fileID: 1546931715126903632}
+  - component: {fileID: 7939591426006502289}
   - component: {fileID: 1836055975426680726}
   m_Layer: 5
   m_Name: MittaImage
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9017491528306810597}
   m_CullTransparentMesh: 1
---- !u!114 &1546931715126903632
+--- !u!114 &7939591426006502289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

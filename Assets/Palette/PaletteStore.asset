@@ -18,10 +18,11 @@ MonoBehaviour:
       - 62a5feb7-8d4d-43ca-909e-58845b8e7314
       - 46c79f00-b44b-49e3-ab88-355b521bdc4c
       - f942f065-0b41-4298-b22e-da55d5fd108b
+      - 993f494f-4fff-441f-a4e5-421796751142
       _values:
       - _id: 62a5feb7-8d4d-43ca-909e-58845b8e7314
         _name:
-          _value: CommonText
+          _value: Black
         _values:
           _keys:
           - 643519c8-43bd-43b3-874d-c2a52b346147
@@ -43,6 +44,14 @@ MonoBehaviour:
           - 643519c8-43bd-43b3-874d-c2a52b346147
           _values:
           - _value: {r: 1, g: 0, b: 0, a: 1}
+      - _id: 993f494f-4fff-441f-a4e5-421796751142
+        _name:
+          _value: New Color
+        _values:
+          _keys:
+          - 643519c8-43bd-43b3-874d-c2a52b346147
+          _values:
+          - _value: {r: 1, g: 1, b: 1, a: 1}
     _themes:
       _keys:
       - 643519c8-43bd-43b3-874d-c2a52b346147
@@ -55,6 +64,7 @@ MonoBehaviour:
       - 46c79f00-b44b-49e3-ab88-355b521bdc4c
       - 62a5feb7-8d4d-43ca-909e-58845b8e7314
       - f942f065-0b41-4298-b22e-da55d5fd108b
+      - 993f494f-4fff-441f-a4e5-421796751142
     _themeOrders:
       _ids:
       - 643519c8-43bd-43b3-874d-c2a52b346147
