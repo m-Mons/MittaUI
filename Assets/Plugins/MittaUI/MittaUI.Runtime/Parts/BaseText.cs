@@ -28,6 +28,9 @@ namespace MittaUI.Runtime.Parts
         /// <summary>フォントのサイズ</summary>
         [SerializeField] private FontSize _fontSize = FontSize.Px24;
 
+        /// <summary>フォントのスタイル</summary>
+        [SerializeField] private FontStyles _fontStyle = FontStyles.Normal;
+        
         /// <summary>テキストが領域から出た時の種別</summary>
         [SerializeField] private TextOverflowType _textOverflowType = TextOverflowType.Shrink;
 
@@ -80,6 +83,14 @@ namespace MittaUI.Runtime.Parts
         {
             _fontSize = fontSize;
             _textMeshPro.fontSize = GetFontSize();
+            UpdateFontSize();
+            UpdateTextArea();
+        }
+        
+        public void SetFontStyle(FontStyles fontStyle)
+        {
+            _fontStyle = fontStyle;
+            _textMeshPro.fontStyle = fontStyle;
             UpdateFontSize();
             UpdateTextArea();
         }
@@ -194,6 +205,7 @@ namespace MittaUI.Runtime.Parts
         public void UpdateFromEditor()
         {
             SetFontSize(_fontSize);
+            SetFontStyle(_fontStyle);
             UpdateFontSize();
             UpdateTextArea();
 #if MITTAUI_USE_UPALETTE
