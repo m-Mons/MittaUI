@@ -33,6 +33,11 @@
             "name": "com.annulusgames.lit-motion",
             "expression": "",
             "define": "MITTAUI_USE_LITMOTION"
+        },
+        {
+            "name": "com.mitta.ui",
+            "expression": "",
+            "define": "MITTAUI_RELEASE"
         }
     ],
     "noEngineReferences": false
