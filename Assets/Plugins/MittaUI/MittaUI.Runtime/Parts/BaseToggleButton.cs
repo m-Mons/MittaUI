@@ -68,7 +68,6 @@ namespace MittaUI.Runtime.Parts
         protected override void OnValidate()
         {
             base.OnValidate();
-            _toggleStateProperty.Value = _toggleState;
             SetVisualState();
         }
     }

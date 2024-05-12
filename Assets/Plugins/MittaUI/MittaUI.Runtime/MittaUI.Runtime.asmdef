@@ -20,11 +20,6 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.cysharp.r3",
-            "expression": "",
-            "define": "MITTAUI_USE_R3"
-        },
-        {
             "name": "com.harumak.upalette",
             "expression": "",
             "define": "MITTAUI_USE_UPALETTE"

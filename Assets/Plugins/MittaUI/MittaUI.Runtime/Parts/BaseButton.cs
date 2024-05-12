@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -21,32 +22,44 @@ namespace MittaUI.Runtime.Parts
         /// <summary>
         ///     クリック時のコールバック
         /// </summary>
-        public Action OnClickedCallback;
+        public Observable<Unit> OnClickedObservable => _onClickedSubject;
+
+        private readonly Subject<Unit> _onClickedSubject = new Subject<Unit>();
 
         /// <summary>
         ///     Disable状態でのクリック時コールバック
         /// </summary>
-        public Action OnClickedCallbackForDisableState;
+        public Observable<Unit> OnClickedForDisableStateObservable => _onClickedForDisableStateSubject;
+
+        private readonly Subject<Unit> _onClickedForDisableStateSubject = new Subject<Unit>();
 
         /// <summary>
         ///     ロングタップ時のコールバック
         /// </summary>
-        public Action OnLongTappedCallback;
+        public Observable<Unit> OnLongTappedObservable => _onLongTappedSubject;
+
+        private readonly Subject<Unit> _onLongTappedSubject = new Subject<Unit>();
 
         /// <summary>
         ///     Disable状態でのロングタップ時コールバック
         /// </summary>
-        public Action OnLongTappedCallbackForDisableState;
+        public Observable<Unit> OnLongTappedForDisableStateObservable => _onLongTappedForDisableStateSubject;
+
+        private readonly Subject<Unit> _onLongTappedForDisableStateSubject = new Subject<Unit>();
 
         /// <summary>
         ///     Press時のコールバック
         /// </summary>
-        public Action<bool> OnPressedCallback;
+        public Observable<bool> OnPressedObservable => _onPressedSubject;
+
+        private readonly Subject<bool> _onPressedSubject = new Subject<bool>();
 
         /// <summary>
         ///     Disable状態でのPress時コールバック
         /// </summary>
-        public Action<bool> OnPressedCallbackForDisableState;
+        public Observable<bool> OnPressedForDisableStateObservable => _onPressedForDisableStateSubject;
+
+        private readonly Subject<bool> _onPressedForDisableStateSubject = new Subject<bool>();
 
         public bool IsEnabled => _isDisabled == false;
 
@@ -135,15 +148,28 @@ namespace MittaUI.Runtime.Parts
         {
             // 必要なパラメータを渡す
             longTapGesture.LongTapCancelDragThreshold = LongTapCancelDragThreshold;
-            longTapGesture.OnLongTapCanceledCallBack = OnLongTapCanceled;
+            longTapGesture
+                .LongTapCanceledObservable
+                .Subscribe(_ => OnLongTapCanceled())
+                .AddTo(destroyCancellationToken);
 
-            longTapGesture.OnClickedCallback += () =>
-            {
-                if (longTapGesture.DragDelta.sqrMagnitude <= ClickCancelDragThreshold * ClickCancelDragThreshold)
-                    OnClickedHandler();
-            };
-            longTapGesture.OnLongTappedCallback += OnLongTappedHandler;
-            longTapGesture.OnPressedCallback += OnPressedHandler;
+            longTapGesture
+                .ClickedObservable
+                .Subscribe(_ =>
+                {
+                    if (longTapGesture.DragDelta.sqrMagnitude <= ClickCancelDragThreshold * ClickCancelDragThreshold)
+                        OnClickedHandler();
+                })
+                .AddTo(destroyCancellationToken);
+
+            longTapGesture.OnLongTappedObservable
+                .Subscribe(_ => OnLongTappedHandler())
+                .AddTo(destroyCancellationToken);
+
+            longTapGesture
+                .OnPressedObservable
+                .Subscribe(OnPressedHandler)
+                .AddTo(destroyCancellationToken);
         }
 
         /// <summary>
@@ -255,39 +281,39 @@ namespace MittaUI.Runtime.Parts
         {
             if (IsDisabled)
             {
-                OnClickedCallbackForDisableState?.Invoke();
+                _onClickedForDisableStateSubject.OnNext(Unit.Default);
                 return;
             }
 
             OnClicked();
             ClickedTransitionAsync(GetCt()).Forget();
-            OnClickedCallback?.Invoke();
+            _onClickedSubject.OnNext(Unit.Default);
         }
 
         protected void OnLongTappedHandler()
         {
             if (IsDisabled)
             {
-                OnLongTappedCallbackForDisableState?.Invoke();
+                _onLongTappedForDisableStateSubject.OnNext(Unit.Default);
                 return;
             }
 
             OnLongTapped();
             LongTappedTransitionAsync(GetCt()).Forget();
-            OnLongTappedCallback?.Invoke();
+            _onLongTappedSubject.OnNext(Unit.Default);
         }
 
         protected void OnPressedHandler(bool isPressed)
         {
             if (IsDisabled)
             {
-                OnPressedCallbackForDisableState?.Invoke(isPressed);
+                _onPressedForDisableStateSubject.OnNext(isPressed);
                 return;
             }
 
             OnPressed(isPressed);
             PressedTransitionAsync(isPressed, GetCt()).Forget();
-            OnPressedCallback?.Invoke(isPressed);
+            _onPressedSubject.OnNext(isPressed);
         }
 
         #endregion
