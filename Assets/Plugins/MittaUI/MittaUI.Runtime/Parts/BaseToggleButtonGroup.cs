@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-#if MITTAUI_USE_R3
 using R3;
-#endif
 
 namespace MittaUI.Runtime.Parts
 {
