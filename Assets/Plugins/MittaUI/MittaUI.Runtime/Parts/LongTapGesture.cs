@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using R3;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -45,22 +46,32 @@ namespace MittaUI.Runtime.Parts
         /// <summary>
         /// クリック時のコールバック（ロングタップ時には呼ばれない）
         /// </summary>
-        public Action OnClickedCallback;
+        public Observable<Unit> ClickedObservable => _onClickedSubject;
+
+        private readonly Subject<Unit> _onClickedSubject = new Subject<Unit>();
+
 
         /// <summary>
         /// ロングタップ時のコールバック
         /// </summary>
-        public Action OnLongTappedCallback;
+        public Observable<Unit> OnLongTappedObservable => _onLongTappedSubject;
+
+        private readonly Subject<Unit> _onLongTappedSubject = new Subject<Unit>();
 
         /// <summary>
         /// Press時のコールバック
         /// </summary>
-        public Action<bool> OnPressedCallback;
+        public Observable<bool> OnPressedObservable => _onPressedSubject;
+
+        private readonly Subject<bool> _onPressedSubject = new Subject<bool>();
+
 
         /// <summary>
         /// ロングタップ中にキャンセルしたときのコールバック
         /// </summary>
-        public Action OnLongTapCanceledCallBack;
+        public Observable<Unit> LongTapCanceledObservable => _onLongTapCanceledSubject;
+
+        private readonly Subject<Unit> _onLongTapCanceledSubject = new Subject<Unit>();
 
         /// <summary>
         /// タップの位置
@@ -144,7 +155,8 @@ namespace MittaUI.Runtime.Parts
                 return;
 
             ClickedPosition = eventData.position;
-            OnClickedCallback?.Invoke();
+
+            _onClickedSubject.OnNext(default);
         }
 
         /// <summary>
@@ -160,7 +172,7 @@ namespace MittaUI.Runtime.Parts
             _lastPressTime = Time.realtimeSinceStartup;
             Position = eventData.position;
             DragDelta = Vector2.zero;
-            OnPressedCallback?.Invoke(true);
+            _onPressedSubject.OnNext(true);
             CancelLongTapCoroutine();
             _longTapCoroutine = StartCoroutine(LongTapEnumerator());
         }
@@ -173,7 +185,7 @@ namespace MittaUI.Runtime.Parts
             if (IsMultiTouchDisabled && eventData.pointerId > 0) return;
 
             IsPressed = false;
-            OnPressedCallback?.Invoke(false);
+            _onPressedSubject.OnNext(false);
             CancelLongTapCoroutine();
 
             if (ClickType == ClickDetectType.OnPointerUp) CheckClick(eventData);
@@ -250,7 +262,7 @@ namespace MittaUI.Runtime.Parts
             _isLongTapWaiting = true;
             yield return new WaitForSeconds(LongTapTime);
             _isLongTapWaiting = false;
-            OnLongTappedCallback?.Invoke();
+            _onLongTappedSubject.OnNext(default);
         }
 
         /// <summary>
@@ -258,7 +270,7 @@ namespace MittaUI.Runtime.Parts
         /// </summary>
         private void CancelLongTapCoroutine()
         {
-            if (_isLongTapWaiting) OnLongTapCanceledCallBack?.Invoke();
+            if (_isLongTapWaiting) _onLongTapCanceledSubject.OnNext(default);
 
             _isLongTapWaiting = false;
             if (_longTapCoroutine != null)

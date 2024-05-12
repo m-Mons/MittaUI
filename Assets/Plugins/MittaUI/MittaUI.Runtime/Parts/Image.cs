@@ -2,10 +2,12 @@ using Cysharp.Threading.Tasks;
 using MittaUI.Runtime.Constant;
 using MittaUI.Runtime.Extension;
 using MittaUI.Runtime.Parts;
-#if MITTAUI_USE_R3
 using R3;
-#endif
+
+#if UNITY_EDITOR
 using UnityEditorInternal;
+#endif
+
 using UnityEngine;
 
 #if MITTAUI_USE_UPALETTE
@@ -103,26 +105,8 @@ namespace MittaUI.Runtime
 
             if (value != null)
             {
-#if MITTAUI_USE_R3
                 Observable.EveryValueChanged(value, x => x.Value)
-                    .Subscribe(color => _image.color = color).AddTo(this);
-#else
-                SetColorLoopAsync().Forget();
-
-                async UniTaskVoid SetColorLoopAsync()
-                {
-                    Color c = value.Value;
-                    while (!destroyCancellationToken.IsCancellationRequested)
-                    {
-                        await UniTask.Yield(cancellationToken: destroyCancellationToken);
-                        if (c != value.Value)
-                        {
-                            c = value.Value;
-                            _image.color = c;
-                        }
-                    }
-                }
-#endif
+                    .Subscribe(color => _image.color = color).AddTo(this); 
             }
         }
 
