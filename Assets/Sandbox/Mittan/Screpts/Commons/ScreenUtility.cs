@@ -40,11 +40,9 @@ namespace Samples.Mittan.Commons
             public enum Names
             {
                 Default,
-                Menu,
-                InGameStage,
             }
         
-            public static Dictionary <Names, string> Label = new Dictionary<Names, string>
+            public static IReadOnlyDictionary <Names, string> Label = new Dictionary<Names, string>
             {
                 {Names.Default, "UiPanels/Pages/Default"},
             }; 
@@ -59,7 +57,7 @@ namespace Samples.Mittan.Commons
                 Default,
             }
         
-            public static Dictionary <Names, string> Label = new Dictionary<Names, string>
+            public static IReadOnlyDictionary <Names, string> Label = new Dictionary<Names, string>
             {
                 {Names.Default, "UiPanels/Sheets/Default"},
             }; 
@@ -72,13 +70,11 @@ namespace Samples.Mittan.Commons
             public enum Names
             {
                 Default,
-                Loading,
             }
         
-            public static Dictionary <Names, string> Label = new Dictionary<Names, string>
+            public static IReadOnlyDictionary <Names, string> Label = new Dictionary<Names, string>
             {
-                {Names.Default, "UiPanels/Sheets/Default"},
-                {Names.Loading, "UiPanels/Commons/LoadingModal"},
+                {Names.Default, "UiPanels/Modals/Default"},
             }; 
         }
         #endregion
