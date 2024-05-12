@@ -12,10 +12,15 @@ namespace MittaUI.Editor.Utility
     public class MyMenuItems
     {
         [MenuItem("GameObject/MittaUI", false, 0)]
-        static void Execute() => InstantiatePrefabWindow.Open("Packages/com.mitta.mitta-ui/MittaUI.Runtime/Prefabs");
+        static void Execute() => InstantiatePrefabWindow.Open(
+#if MITTAUI_RELEASE
+            "Packages/com.mitta.mitta-ui/MittaUI.Runtime/Prefabs"
+#else
+            "Assets/Plugins/MittaUI/MittaUI.Runtime/Prefabs"
+#endif
+        );
     }
 
-    
     /// <summary>
     /// 指定したディレクトリ配下を対象にした Prefab 一覧を表示し、選択した Prefab を配置するメニューウィンドウ
     /// </summary>
