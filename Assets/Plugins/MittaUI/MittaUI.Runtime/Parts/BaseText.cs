@@ -42,6 +42,8 @@ namespace MittaUI.Runtime.Parts
 
         protected FontSize FontSize => _fontSize;
 
+        public string Text => _textMeshPro.text;
+
         protected sealed override void Awake()
         {
             base.Awake();
