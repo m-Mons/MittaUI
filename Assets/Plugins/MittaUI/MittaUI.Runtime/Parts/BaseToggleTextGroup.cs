@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using R3;
@@ -16,17 +17,17 @@ namespace MittaUI.Runtime.Parts
         private ReactiveProperty<int> _selectedTextIndexProperty;
         public Observable<int> OnSelectedTextIndexChangedObservable => _selectedTextIndexProperty;
 
-        [SerializeField] private SimpleText _titleText;
+        [SerializeField] private BaseText _titleText;
         public string Title
         {
             get => _titleText.Text;
             set => _titleText.SetText(value);
         }
         
-        [SerializeField] private Transform _TextContent;
-        [SerializeField] private SimpleText _mainText;
-        [SerializeField] private SimpleText _leftText;
-        [SerializeField] private SimpleText _rightText;
+        [SerializeField] private Transform _TextContentTransform;
+        [SerializeField] private BaseText _mainText;
+        [SerializeField] private BaseText _leftText;
+        [SerializeField] private BaseText _rightText;
 
         [SerializeField] private BaseButton _rightSelectButton;
         [SerializeField] private BaseButton _leftSelectButton;
@@ -42,24 +43,24 @@ namespace MittaUI.Runtime.Parts
 
             _rightSelectButton.OnClickedObservable.Where(_ => _canInteracitive).SubscribeAwait(async (_, ct) =>
             {
-                await ChangeToggleValue(_selectedTextIndexProperty.Value + 1,_leftText.transform.position);
+                await ChangeToggleValue(_selectedTextIndexProperty.Value + 1,_leftText.transform.position, ct);
             }).AddTo(this);
 
             _leftSelectButton.OnClickedObservable.Where(_ => _canInteracitive).SubscribeAwait(async (_, ct) =>
             {
-                await ChangeToggleValue(_selectedTextIndexProperty.Value - 1 + _choices.Count,_rightText.transform.position);
+                await ChangeToggleValue(_selectedTextIndexProperty.Value - 1 + _choices.Count,_rightText.transform.position, ct);
             }).AddTo(this);
         }
 
-        private async UniTask ChangeToggleValue(int value, Vector3　to)
+        private async UniTask ChangeToggleValue(int value, Vector3　to, CancellationToken ct)
         {
             _canInteracitive = false;
 
             _selectedTextIndexProperty.Value = value % _choices.Count;
 
             await TweenProvider.Move(_mainText.transform.position, to, 0.5f,
-                _TextContent);
-            _TextContent.localPosition = Vector3.zero;
+                _TextContentTransform);
+            _TextContentTransform.localPosition = Vector3.zero;
 
             SetTexts(_selectedTextIndexProperty.Value);
 
