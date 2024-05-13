@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using R3;
 
-
 namespace MittaUI.Runtime.Parts
 {
     public class ToggleButtonGroup : UIBehaviour
