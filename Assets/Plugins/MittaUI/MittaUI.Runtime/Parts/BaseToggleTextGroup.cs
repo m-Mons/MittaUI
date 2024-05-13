@@ -39,52 +39,33 @@ namespace MittaUI.Runtime.Parts
 
             _selectedTextIndexProperty = new ReactiveProperty<int>(0);
             SetTexts(0);
-            
-            _selectedTextIndexProperty.Subscribe(index =>
+
+            _rightSelectButton.OnClickedObservable.Where(_ => _canInteracitive).SubscribeAwait(async (_, ct) =>
             {
-                Debug.Log(index);
+                await ChangeToggleValue(_selectedTextIndexProperty.Value + 1,_leftText.transform.position);
             }).AddTo(this);
 
-            _rightSelectButton.OnClickedObservable.SubscribeAwait(async (_, ct) =>
+            _leftSelectButton.OnClickedObservable.Where(_ => _canInteracitive).SubscribeAwait(async (_, ct) =>
             {
-                if(!_canInteracitive)return;
-                _canInteracitive = false;
-                
-                if(_selectedTextIndexProperty.Value + 1 > _choices.Count - 1) {_selectedTextIndexProperty.Value = 0;}
-                else {_selectedTextIndexProperty.Value++;}
-
-                await TweenProvider.Move(_mainText.transform.position, _leftText.transform.position, 0.5f, _TextContent);
-                _TextContent.localPosition = Vector3.zero;
-
-                SetTexts(_selectedTextIndexProperty.Value);
-                
-                _canInteracitive = true;
-            }).AddTo(this);
-
-            _leftSelectButton.OnClickedObservable.SubscribeAwait(async (_, ct) =>
-            {
-                if (!_canInteracitive) return;
-                _canInteracitive = false;
-
-                if (_selectedTextIndexProperty.Value - 1 < 0)
-                {
-                    _selectedTextIndexProperty.Value = _choices.Count - 1;
-                }
-                else
-                {
-                    _selectedTextIndexProperty.Value--;
-                }
-
-                await TweenProvider.Move(_mainText.transform.position, _rightText.transform.position, 0.5f,
-                    _TextContent);
-                _TextContent.localPosition = Vector3.zero;
-
-                SetTexts(_selectedTextIndexProperty.Value);
-
-                _canInteracitive = true;
+                await ChangeToggleValue(_selectedTextIndexProperty.Value - 1 + _choices.Count,_rightText.transform.position);
             }).AddTo(this);
         }
 
+        private async UniTask ChangeToggleValue(int value, Vector3　to)
+        {
+            _canInteracitive = false;
+
+            _selectedTextIndexProperty.Value = value % _choices.Count;
+
+            await TweenProvider.Move(_mainText.transform.position, to, 0.5f,
+                _TextContent);
+            _TextContent.localPosition = Vector3.zero;
+
+            SetTexts(_selectedTextIndexProperty.Value);
+
+            _canInteracitive = true;
+        }
+        
         public string GetSelectedValue()
         {
             return _choices[_selectedTextIndexProperty.Value];
@@ -93,8 +74,8 @@ namespace MittaUI.Runtime.Parts
         private void SetTexts(in int id)
         {
             _mainText.SetText(_choices[id]);
-            var rightId = id + 1 > _choices.Count - 1 ? 0 : id + 1;
-            var leftId = id - 1 < 0 ? _choices.Count - 1 : id - 1;
+            var rightId = (id + 1) % _choices.Count;
+            var leftId = (id - 1 + _choices.Count) % _choices.Count;
             _rightText.SetText(_choices[rightId]);
             _leftText.SetText(_choices[leftId]);
         }
