@@ -36,9 +36,7 @@ UnityにおけるuGUI周りをハッカソンへ向けて行うための基盤�
 ```json
 {
     "dependencies": {
-        "com.mitta.mitta-ui": "https://github.com/m-Mons/MittaUI.git?path=Assets/Plugins/MittaUI
-        
-        "
+        "com.mitta.mitta-ui": "https://github.com/m-Mons/MittaUI.git?path=Assets/Plugins/MittaUI"
     }
 }
 ```
