@@ -36,7 +36,8 @@ UnityにおけるuGUI周りをハッカソンへ向けて行うための基盤�
 ```json
 {
     "dependencies": {
-        "com.mitta.mitta-ui": "https://github.com/m-Mons/MittaUI.git
+        "com.mitta.mitta-ui": "https://github.com/m-Mons/MittaUI.git?path=Assets/Plugins/MittaUI
+        
         "
     }
 }
@@ -49,7 +50,6 @@ UnityにおけるuGUI周りをハッカソンへ向けて行うための基盤�
 
 ## 本リポジトリで行っていること
 * UIの基盤提供
-* Unity Screen Navigatorを用いたModalのPopUp表示機能
 * 簡単なUIアニメーション
 * サンプルとなるUI画面の提供
 
