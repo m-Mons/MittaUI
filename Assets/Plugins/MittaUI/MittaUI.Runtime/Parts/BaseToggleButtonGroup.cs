@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-#if MITTAUI_USE_R3
 using R3;
-#endif
+
 
 namespace MittaUI.Runtime.Parts
 {
@@ -22,10 +19,7 @@ namespace MittaUI.Runtime.Parts
             base.Awake();
 
             _selectedButtonIndexProperty = new ReactiveProperty<int>(0);
-            _selectedButtonIndexProperty.Subscribe(index =>
-            {
-                Debug.Log(index);
-            }).AddTo(this);
+            _selectedButtonIndexProperty.Subscribe(index => { Debug.Log(index); }).AddTo(this);
 
             foreach (var (btn, i) in _toggleButtons.Select(static (btn, i) => (btn, i)))
             {
@@ -42,7 +36,7 @@ namespace MittaUI.Runtime.Parts
                         }
 
                         btn.SetToggleState(true);
-                        
+
                         // onの時の再度タイプ阻止
                         btn.SetDisable(true);
                     }).AddTo(this);
