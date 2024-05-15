@@ -10,9 +10,7 @@ using UnityEditorInternal;
 
 using UnityEngine;
 
-#if MITTAUI_USE_UPALETTE
 using uPalette.Runtime.Core;
-#endif
 
 namespace MittaUI.Runtime
 {
@@ -29,12 +27,11 @@ namespace MittaUI.Runtime
         /// </summary>
         [SerializeField] private UnityEngine.UI.Image _image;
 
-#if MITTAUI_USE_UPALETTE
         /// <summary>
         ///     色のEntryId(uPaletteのもの)
         /// </summary>
         [SerializeField] private ColorEntryId _entryId = new();
-#endif
+
 
         /// <summary>
         ///     ImageType
@@ -56,12 +53,10 @@ namespace MittaUI.Runtime
         protected override void Awake()
         {
             base.Awake();
-#if MITTAUI_USE_UPALETTE
             _image.SetColorFromEntryId(_entryId);
-#endif
-#if MITTAUI_USE_UPALETTE
+
             SubscribePaletteStore();
-#endif
+
         }
 
         /// <summary>
@@ -87,7 +82,6 @@ namespace MittaUI.Runtime
         {
             _image.fillAmount = fillAmount;
         }
-#if MITTAUI_USE_UPALETTE
         /// <summary>
         /// Color設定
         /// </summary>
@@ -96,9 +90,6 @@ namespace MittaUI.Runtime
             _entryId.Value = colorStyleEntryId;
             _image.SetColorFromEntryId(_entryId);
         }
-#endif
-
-#if MITTAUI_USE_UPALETTE
         private void SubscribePaletteStore()
         {
             PaletteStore.Instance.ColorPalette.TryGetActiveValue(_entryId.Value, out var value);
@@ -106,11 +97,10 @@ namespace MittaUI.Runtime
             if (value != null)
             {
                 Observable.EveryValueChanged(value, x => x.Value)
-                    .Subscribe(color => _image.color = color).AddTo(this); 
+                    .Subscribe(color => _image.color = color).AddTo(this);
             }
         }
 
-#endif
 #if UNITY_EDITOR
         protected override void Reset()
         {
@@ -121,17 +111,15 @@ namespace MittaUI.Runtime
             // デフォルトfalse
             _image.raycastTarget = false;
 
-#if MITTAUI_USE_UPALETTE
             _entryId.Value = string.Empty;
-#endif
         }
-#if MITTAUI_USE_UPALETTE
+
         protected override void OnValidate()
         {
             base.OnValidate();
             _image.SetColorFromEntryId(_entryId);
         }
-#endif
+
 #endif
     }
 }

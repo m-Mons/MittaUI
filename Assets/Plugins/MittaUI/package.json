@@ -5,7 +5,8 @@
   "unity": "2022.3",
   "license": "MIT",
   "dependencies": {
-    "com.cysharp.unitask": "2.0.0"
+    "com.cysharp.unitask": "2.0.0",
+    "com.harumak.upalette": "2.0.0"
   },
   "author": {
     "name": "hoge",

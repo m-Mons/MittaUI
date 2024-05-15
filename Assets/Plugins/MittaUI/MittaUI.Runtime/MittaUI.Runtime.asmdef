@@ -20,11 +20,6 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.harumak.upalette",
-            "expression": "",
-            "define": "MITTAUI_USE_UPALETTE"
-        },
-        {
             "name": "com.annulusgames.lit-motion",
             "expression": "",
             "define": "MITTAUI_USE_LITMOTION"
