@@ -97,7 +97,7 @@ namespace MittaUI.Runtime
             if (value != null)
             {
                 Observable.EveryValueChanged(value, x => x.Value)
-                    .Subscribe(color => _image.color = color).AddTo(this);
+                    .Subscribe(color => _image.color = color).AddTo(destroyCancellationToken);
             }
         }
 

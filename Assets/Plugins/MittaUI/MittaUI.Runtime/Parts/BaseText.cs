@@ -2,6 +2,7 @@ using MittaUI.Runtime.Constant;
 using MittaUI.Runtime.Extension;
 using TMPro;
 using UnityEngine;
+using uPalette.Runtime.Core;
 #if MITTAUI_USE_UPALETTE
 using uPalette.Runtime.Core;
 #endif
@@ -21,10 +22,10 @@ namespace MittaUI.Runtime.Parts
         private static readonly int _fontSizeMin = UIConst.GetFontSize(FontSize.Px20);
 
         [SerializeField] private TextMeshProUGUI _textMeshPro;
-#if MITTAUI_USE_UPALETTE
+
         // <summary>色のEntryId(uPaletteのもの)</summary>
         [SerializeField] private ColorEntryId _colorEntryId = new();
-#endif
+
         /// <summary>フォントのサイズ</summary>
         [SerializeField] private FontSize _fontSize = FontSize.Px24;
 
@@ -49,10 +50,9 @@ namespace MittaUI.Runtime.Parts
             base.Awake();
             OnAwake();
 
-#if MITTAUI_USE_UPALETTE
             // 色の設定
             _textMeshPro.SetColorFromEntryId(_colorEntryId);
-#endif
+
             SetupFontSizeMin();
         }
 
@@ -71,7 +71,6 @@ namespace MittaUI.Runtime.Parts
 
             UpdateTextArea();
         }
-#if MITTAUI_USE_UPALETTE
 
         /// <summary> Color設定 </summary>
         public void SetColor(string colorStyleEntryId)
@@ -79,7 +78,6 @@ namespace MittaUI.Runtime.Parts
             _colorEntryId.Value = colorStyleEntryId;
             _textMeshPro.SetColorFromEntryId(_colorEntryId);
         }
-#endif
 
         public void SetFontSize(FontSize fontSize)
         {
