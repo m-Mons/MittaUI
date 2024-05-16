@@ -46,7 +46,7 @@ namespace MittaUI.Runtime.Parts
 
             _selectedTextIndexProperty = new ReactiveProperty<int>(0);
             SetTexts(0);
-            _textShowerList.ForEach(_ => _textShowerDefaultPositionsList.Add(_.localPosition));
+            _textShowerList.ForEach(t => _textShowerDefaultPositionsList.Add(t.localPosition));
 
             _rightSelectButton.OnClickedObservable.Where(_ => _canInteracitive).SubscribeAwait(async (_, ct) =>
             {

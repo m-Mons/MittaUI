@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9021794698715227954}
   - component: {fileID: 4942532279786089962}
-  - component: {fileID: 3006475140260853537}
-  - component: {fileID: 1836055975426680726}
+  - component: {fileID: 3491141755836208592}
+  - component: {fileID: 1240867903930404425}
   m_Layer: 5
   m_Name: MittaImage
   m_TagString: Untagged
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9017491528306810597}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9017491528306810597}
   m_CullTransparentMesh: 1
---- !u!114 &3006475140260853537
+--- !u!114 &3491141755836208592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,10 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d97a5b3d757491ebdc97c3016f5b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 1836055975426680726}
+  _image: {fileID: 1240867903930404425}
   _entryId:
     _value: 
---- !u!114 &1836055975426680726
+--- !u!114 &1240867903930404425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,14 +75,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
