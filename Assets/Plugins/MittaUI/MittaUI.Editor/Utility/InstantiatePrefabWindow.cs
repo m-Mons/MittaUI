@@ -7,6 +7,8 @@ using System.Linq;
 using System.IO;
 using static UnityEngine.Mathf;
 
+#if UNITY_EDITOR
+
 namespace MittaUI.Editor.Utility
 {
     public class MyMenuItems
@@ -141,3 +143,4 @@ namespace MittaUI.Editor.Utility
         }
     }
 }
+#endif

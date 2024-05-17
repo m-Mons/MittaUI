@@ -64,11 +64,12 @@ namespace MittaUI.Runtime.Parts
         {
             _button.SetDisabled(disable);
         }
-
+#if UNITY_EDITOR
         protected override void OnValidate()
         {
             base.OnValidate();
             SetVisualState(_toggleState);
         }
+#endif
     }
 }

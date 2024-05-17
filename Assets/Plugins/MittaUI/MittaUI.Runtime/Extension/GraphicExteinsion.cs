@@ -14,7 +14,7 @@ namespace MittaUI.Runtime.Extension
         {
             if (PaletteStore.Instance == null)
             {
-                Debug.LogError($"Project内に{nameof(PaletteStore.Instance.ColorPalette)}が存在しないので色を設定できません");
+                Debug.LogWarning($"Project内に{nameof(PaletteStore.Instance.ColorPalette)}が存在しないので色を設定できません");
                 return;
             }
 

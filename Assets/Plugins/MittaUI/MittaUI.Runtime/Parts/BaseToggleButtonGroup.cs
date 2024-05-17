@@ -18,7 +18,6 @@ namespace MittaUI.Runtime.Parts
             base.Awake();
 
             _selectedButtonIndexProperty = new ReactiveProperty<int>(0);
-            _selectedButtonIndexProperty.Subscribe(index => { Debug.Log(index); }).AddTo(this);
 
             foreach (var (btn, i) in _toggleButtons.Select(static (btn, i) => (btn, i)))
             {
@@ -40,6 +39,8 @@ namespace MittaUI.Runtime.Parts
                         btn.SetDisable(true);
                     }).AddTo(this);
             }
+
+            _selectedButtonIndexProperty.Value = 0;
         }
     }
 }
