@@ -92,6 +92,7 @@ namespace MittaUI.Runtime
         }
         private void SubscribePaletteStore()
         {
+            if(PaletteStore.Instance == null) return;
             PaletteStore.Instance.ColorPalette.TryGetActiveValue(_entryId.Value, out var value);
 
             if (value != null)

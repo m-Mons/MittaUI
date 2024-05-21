@@ -55,31 +55,31 @@ namespace MittaUI.Runtime.TinyTween
         }
 
         public static async UniTask Tween(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default, GameObject bind = null)
         {
 #if MITTAUI_USE_LITMOTION
-            await TweenLitMotion(from, to, duration, onUpdate, onComplete, ease, ct);
+            await TweenLitMotion(from, to, duration, onUpdate, onComplete, ease, ct, bind);
 #elif MITTAUI_USE_DOTWEEN && UNITASK_DOTWEEN_SUPPORT
-            await TweenDoTween(from, to, duration, onUpdate, onComplete,ease, ct);
+            await TweenDoTween(from, to, duration, onUpdate, onComplete,ease, ct, bind);
 #else
-            await TweenPureUpdate(from, to, duration, onUpdate, onComplete, ct);
+            await TweenPureUpdate(from, to, duration, onUpdate, onComplete, ct, bind);
 #endif
         }
 
         public static async UniTask Move(Vector3 from, Vector3 to, float duration, Transform target,
-            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default, GameObject bind = null)
         {
-            await Tween(0, 1, duration, t => { target.position = Vector3.Lerp(from, to, t); }, onComplete, ease, ct);
+            await Tween(0, 1, duration, t => { target.position = Vector3.Lerp(from, to, t); }, onComplete, ease, ct, bind);
         }
-        
+
         public static async UniTask Scale(Vector3 from, Vector3 to, float duration, Transform target,
-            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default, GameObject bind = null)
         {
-            await Tween(0, 1, duration, t => { target.localScale = Vector3.Lerp(from, to, t); }, onComplete, ease, ct);
+            await Tween(0, 1, duration, t => { target.localScale = Vector3.Lerp(from, to, t); }, onComplete, ease, ct, bind);
         }
 
         private static async UniTask TweenPureUpdate(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, CancellationToken ct = default)
+            Action onComplete = null, CancellationToken ct = default, GameObject bind = null)
         {
             float time = 0;
             while (time < duration)
@@ -91,18 +91,25 @@ namespace MittaUI.Runtime.TinyTween
 
                 time += Time.deltaTime;
                 onUpdate.Invoke(Mathf.Lerp(from, to, time / duration));
-                await UniTask.Yield();
+                await UniTask.Yield(cancellationToken: ct);
             }
+            
+            onComplete?.Invoke();
         }
 
 
 # if MITTAUI_USE_LITMOTION
         private static async UniTask TweenLitMotion(float from, float to, float duration, Action<float> onUpdate,
-            Action onComplete = null, EaseType ease = default, CancellationToken ct = default)
+            Action onComplete = null, EaseType ease = default, CancellationToken ct = default, GameObject bind = null)
         {
             var tween = LMotion.Create(from, to, duration)
                 .WithEase((Ease)ease)
                 .Bind(onUpdate);
+            
+            if (bind != null)
+            {
+                tween.AddTo(bind);
+            }
 
             await tween.ToUniTask(ct);
 
