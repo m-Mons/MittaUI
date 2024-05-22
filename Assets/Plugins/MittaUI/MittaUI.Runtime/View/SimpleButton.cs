@@ -16,51 +16,44 @@ namespace MittaUI.Runtime
         [Header("===ボタンのアニメーションのパラメータ===")] [Header("アニメーションをさせるかどうか    ")] [SerializeField]
         private bool _doAnimation = true;
 
-        [SerializeField]
-        [Header("ボタンをアニメーションさせるTransform")]
+        [SerializeField] [Header("ボタンをアニメーションさせるTransform")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private Transform _buttonAnimationTransform;
 
-        [SerializeField]
-        [Header("押下後のスケール")]
+        [SerializeField] [Header("押下後のスケール")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private float _buttonAnimationPressScale = 0.9f;
 
-        [SerializeField]
-        [Header("完全に押下するまでの時間")]
+        [SerializeField] [Header("完全に押下するまでの時間")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private float _buttonAnimationPressDuration = 0.25f;
 
-        [SerializeField]
-        [Header("押下時のイージング")]
+        [SerializeField] [Header("押下時のイージング")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private TweenProvider.EaseType _buttonAnimationPressEase =
             TweenProvider.EaseType.OutCubic;
 
-        [SerializeField]
-        [Header("元の大きさに戻るまでの時間")]
+        [SerializeField] [Header("元の大きさに戻るまでの時間")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private float _buttonAnimationPullDuration = 0.25f;
 
-        [SerializeField]
-        [Header("デフォルトのスケール")]
+        [SerializeField] [Header("デフォルトのスケール")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
         private float _buttonAnimationDefaultScale = 1f;
 
-        [SerializeField]
-        [Header("元の大きさの戻る時のイージング")]
+        [SerializeField] [Header("元の大きさの戻る時のイージング")]
 #if MITTAUI_USE_NAUGHTYATTRIBUTES
         [ShowIf(nameof(_doAnimation))]
 #endif
@@ -93,14 +86,14 @@ namespace MittaUI.Runtime
                 TweenProvider.Scale(Vector3.one, Vector3.one * _buttonAnimationPressScale,
                     _buttonAnimationPressDuration, _buttonAnimationTransform,
                     ease: _buttonAnimationPullEase,
-                    ct: _animeCts.Token).Forget();
+                    ct: _animeCts.Token, bind: _buttonAnimationTransform.gameObject).Forget();
             }
             else
             {
                 TweenProvider.Scale(Vector3.one * _buttonAnimationPressScale, Vector3.one,
                     _buttonAnimationPullDuration, _buttonAnimationTransform,
                     ease: _buttonAnimationPullEase,
-                    ct: _animeCts.Token).Forget();
+                    ct: _animeCts.Token, bind: _buttonAnimationTransform.gameObject).Forget();
             }
         }
     }

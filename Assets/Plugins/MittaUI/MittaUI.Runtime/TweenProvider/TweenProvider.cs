@@ -134,7 +134,7 @@ namespace MittaUI.Runtime.TinyTween
             CancellationToken ct = default)
         {
             var alpha = graphic.alpha;
-            await Tween(alpha, targetAlpha, duration, x => graphic.alpha = x, ct: ct);
+            await Tween(alpha, targetAlpha, duration, x => graphic.alpha = x, ct: ct, bind: graphic.gameObject);
         }
 
         public static async UniTask FadeAsync(this Graphic graphic, float targetAlpha, float duration,
@@ -146,7 +146,7 @@ namespace MittaUI.Runtime.TinyTween
             {
                 color.a = x;
                 graphic.color = color;
-            }, ct: ct);
+            }, ct: ct, bind: graphic.gameObject);
         }
     }
 }
