@@ -16,6 +16,9 @@ namespace MittaUI.Runtime.Parts
 
         [Header("チェックボックス反映先のCanvasGroup")] [SerializeField]
         private CanvasGroup _targetGroup;
+        
+        [Header("非活性時のCanvasGroup")] [SerializeField]
+        private CanvasGroup _disableGroup;
 
         private ReactiveProperty<bool> _toggleStateProperty { get; set; } = new ReactiveProperty<bool>();
         public Observable<bool> ToggleStateProperty => _toggleStateProperty;
@@ -38,11 +41,13 @@ namespace MittaUI.Runtime.Parts
                 .Subscribe(state =>
                 {
                     _toggleState = state;
-                    SetVisualState(_toggleStateProperty.Value);
+                    SetVisualState(state);
                     OnToggleChangedCallback?.Invoke(_toggleState);
                 }).AddTo(this);
+            
+            _toggleStateProperty.Value = _toggleState;
         }
-
+        
         public void SetToggleState(bool state)
         {
             _toggleStateProperty.Value = state;
@@ -53,10 +58,22 @@ namespace MittaUI.Runtime.Parts
             if (value)
             {
                 _targetGroup.Enable();
+                
             }
             else
             {
                 _targetGroup.Disable();
+            }
+
+            if (_disableGroup == null) return;
+            
+            if (!value)
+            {
+                _disableGroup.Enable();
+            }
+            else
+            {
+                _disableGroup.Disable();
             }
         }
 

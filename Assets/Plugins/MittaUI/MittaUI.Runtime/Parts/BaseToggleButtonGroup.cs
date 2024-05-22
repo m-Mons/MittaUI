@@ -41,6 +41,23 @@ namespace MittaUI.Runtime.Parts
             }
 
             _selectedButtonIndexProperty.Value = 0;
+
+            for (var i = 0; i < _toggleButtons.Count; i++)
+            {
+                _toggleButtons[i].SetToggleState(i == 0);
+                _toggleButtons[i].SetDisable(i == 0);
+                
+            }
+        }
+        
+        public void SetSelectedButtonIndex(int index)
+        {
+            if (index < 0 || index >= _toggleButtons.Count)
+            {
+                return;
+            }
+
+            _selectedButtonIndexProperty.Value = index;
         }
     }
 }
