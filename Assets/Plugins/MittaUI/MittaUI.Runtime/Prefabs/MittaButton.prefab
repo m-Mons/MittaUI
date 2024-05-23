@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3662015476594121479}
   - component: {fileID: 8142529081662277131}
   - component: {fileID: 4622524140608836149}
+  - component: {fileID: -830371986157125344}
   m_Layer: 5
   m_Name: MittaButton
   m_TagString: Untagged
@@ -72,6 +73,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc321f6378aab1544b8e0d3caf9d3b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-830371986157125344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413456820608376366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77ae62fb68640558891256d6b5981f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7575923663272741770
